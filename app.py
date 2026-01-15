@@ -78,18 +78,30 @@ if uploaded_file is not None:
                 
                 st.write("### 🚩 High Risk Items (Anomalies)")
                 if not anomalies.empty:
-                    st.dataframe(anomalies[output_cols].style.format({
-                        'unit_price': '{:,.0f}',
-                        'reference_unit_price': '{:,.0f}',
-                        'price_deviation_ratio': '{:.2f}x',
-                        'total_price_discrepancy': '{:,.0f}',
-                        'risk_score': '{:.1f}'
-                    }).background_gradient(subset=['risk_score'], cmap='Reds'))
+                    st.dataframe(
+                        anomalies[output_cols],
+                        column_config={
+                            "unit_price": st.column_config.NumberColumn("unit_price", format="%,.0f"),
+                            "reference_unit_price": st.column_config.NumberColumn("reference_unit_price", format="%,.0f"),
+                            "price_deviation_ratio": st.column_config.NumberColumn("price_deviation_ratio", format="%.2f"),
+                            "total_price_discrepancy": st.column_config.NumberColumn("total_price_discrepancy", format="%,.0f"),
+                            "risk_score": st.column_config.ProgressColumn("risk_score", min_value=0, max_value=100, format="%.1f")
+                        }
+                    )
                 else:
                     st.info("No anomalies detected based on current settings.")
                 
                 st.write("### All Data")
-                st.dataframe(results_df[output_cols])
+                st.dataframe(
+                    results_df[output_cols],
+                    column_config={
+                        "unit_price": st.column_config.NumberColumn("unit_price", format="%,.0f"),
+                        "reference_unit_price": st.column_config.NumberColumn("reference_unit_price", format="%,.0f"),
+                        "price_deviation_ratio": st.column_config.NumberColumn("price_deviation_ratio", format="%.2f"),
+                        "total_price_discrepancy": st.column_config.NumberColumn("total_price_discrepancy", format="%,.0f"),
+                        "risk_score": st.column_config.ProgressColumn("risk_score", min_value=0, max_value=100, format="%.1f")
+                    }
+                )
                 
                 # Download
                 csv = results_df.to_csv(index=False).encode('utf-8')
