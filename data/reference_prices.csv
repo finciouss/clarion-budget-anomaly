@@ -1,0 +1,13 @@
+standardized_item_name,reference_unit_price,source
+"laptop dell latitude",14500000,"E-Catalog"
+"paper a4 80gsm",45000,"Market Survey"
+"printer epson l3110",2300000,"E-Catalog"
+"meeting chair",800000,"Market Survey"
+"server high end",350000000,"Vendor Quote"
+"consulting services",0,"Variable"
+"catering box",45000,"Standard Cost"
+"sand",250000,"Material Index"
+"cement 50kg",65000,"Material Index"
+"office desk",2500000,"Market Survey"
+"ballpoint pen",3000,"Market Survey"
+"scanner",3500000,"E-Catalog"
